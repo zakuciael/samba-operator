@@ -35,7 +35,7 @@ YAMLLINT_CMD:=yamllint
 
 # Image URL to use all building/pushing image targets
 TAG?=latest
-IMG?=quay.io/samba.org/samba-operator:$(TAG)
+IMG?=ghcr.io/zakuciael/samba-operator:$(TAG)
 
 # Produce CRDs that work on Kubernetes 1.16 or later
 CRD_OPTIONS?="crd:crdVersions=v1"

@@ -6,6 +6,11 @@ on:
     branches: [master, release]
   pull_request:
     branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Do a build/compile smoke test
   build:
@@ -153,10 +158,10 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
-      - name: log in to quay.io
+      - name: log in to ghcr.io
         # using docker for now, since podman has an issue with space
         # consumption: image build fails with no space left on device...
-        run: echo "${{ secrets.QUAY_PASS }}" | docker login -u "${{ secrets.QUAY_USER }}" --password-stdin quay.io
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u "${{ github.repository_owner }}" --password-stdin ghcr.io
       - name: build container image
         # note: forcing use of docker here, since we did docker login above
         run: make CONTAINER_CMD=docker image-build
