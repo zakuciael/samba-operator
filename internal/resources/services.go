@@ -29,9 +29,10 @@ func newServiceForSmb(planner *pln.Planner, ns string) *corev1.Service {
 	labels := labelsForSmbServer(planner)
 	return &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      planner.InstanceName(),
-			Namespace: ns,
-			Labels:    labels,
+			Name:        planner.InstanceName(),
+			Namespace:   ns,
+			Labels:      labels,
+			Annotations: annotationsForSmbService(planner),
 		},
 		Spec: corev1.ServiceSpec{
 			Type: toServiceType(planner.ServiceType()),
@@ -46,6 +47,14 @@ func newServiceForSmb(planner *pln.Planner, ns string) *corev1.Service {
 			},
 		},
 	}
+}
+
+func annotationsForSmbService(planner *pln.Planner) map[string]string {
+	if planner.CommonConfig != nil {
+		return planner.CommonConfig.Annotations
+	}
+
+	return map[string]string{}
 }
 
 func toServiceType(s string) corev1.ServiceType {

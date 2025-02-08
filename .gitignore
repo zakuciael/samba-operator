@@ -34,3 +34,6 @@ devel.mk
 
 # local GOBIN for build tools
 /.bin
+
+.envrc
+.direnv/*
