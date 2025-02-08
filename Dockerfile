@@ -26,8 +26,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=${ARCH} GO111MODULE=on \
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
 LABEL org.opencontainers.image.title="Samba operator"
-LABEL org.opencontainers.image.vendor="Samba in Kubernetes"
-LABEL org.opencontainers.image.url="https://github.com/samba-in-kubernetes/samba-operator"
+LABEL org.opencontainers.image.vendor="zakuciael"
+LABEL org.opencontainers.image.source="https://github.com/zakuciael/samba-operator"
+LABEL org.opencontainers.image.url="https://github.com/zakuciael/samba-operator"
 
 WORKDIR /
 COPY --from=builder /workspace/manager .
