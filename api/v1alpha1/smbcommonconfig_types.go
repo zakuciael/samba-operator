@@ -51,7 +51,7 @@ type SmbCommonNetworkSpec struct {
 
 	// ServiceAnnotations specifies additional annotations applied on
 	// the generated Service resources for your SMB shares
-	ServiceAnnotations map[string]string `json:"annotations,omitempty" protobuf:"bytes,12,rep,name=annotations"`
+	ServiceAnnotations map[string]string `json:"serviceAnnotations,omitempty"`
 }
 
 // SmbCommonConfigPodSettings contains values pertaining to the customization

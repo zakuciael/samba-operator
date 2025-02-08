@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.17.1
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: smbcommonconfigs.samba-operator.samba.org
 spec:
   group: samba-operator.samba.org
@@ -46,13 +46,6 @@ spec:
                     Network specifies what kind of networking shares associated with
                     this config will use.
                   properties:
-                    annotations:
-                      additionalProperties:
-                        type: string
-                      description: |-
-                        ServiceAnnotations specifies additional annotations applied on
-                        the generated Service resources for your SMB shares
-                      type: object
                     publish:
                       description: |-
                         Publish broadly specifies what kind of networking shares associated with
@@ -61,8 +54,13 @@ spec:
                         - cluster
                         - external
                       type: string
-                  required:
-                    - publish
+                    serviceAnnotations:
+                      additionalProperties:
+                        type: string
+                      description: |-
+                        ServiceAnnotations specifies additional annotations applied on
+                        the generated Service resources for your SMB shares
+                      type: object
                   type: object
                 podSettings:
                   description: |-
@@ -798,8 +796,6 @@ spec:
                       description: NodeSelector values will be assigned to a PodSpec's NodeSelector.
                       type: object
                   type: object
-              required:
-                - network
               type: object
             status:
               description: SmbCommonConfigStatus defines the observed state of SmbCommonConfig

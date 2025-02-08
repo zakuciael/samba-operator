@@ -5,12 +5,9 @@ metadata:
   name: manager-role
 rules:
   - apiGroups:
-      - ""
+      - apps
     resources:
-      - configmaps
-      - persistentvolumeclaims
-      - serviceaccounts
-      - services
+      - deployments
     verbs:
       - create
       - delete
@@ -20,26 +17,8 @@ rules:
       - update
       - watch
   - apiGroups:
-      - ""
-    resources:
-      - endpoints
-      - namespaces
-      - pods
-    verbs:
-      - get
-      - list
-      - update
-      - watch
-  - apiGroups:
-      - ""
-    resources:
-      - events
-    verbs:
-      - create
-  - apiGroups:
       - apps
     resources:
-      - deployments
       - statefulsets
     verbs:
       - create
@@ -58,6 +37,79 @@ rules:
       - delete
       - get
       - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+      - namespaces
+      - pods
+      - services
+    verbs:
+      - get
+      - list
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - persistentvolumeclaims
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
       - update
       - watch
   - apiGroups:
@@ -87,8 +139,6 @@ rules:
       - samba-operator.samba.org
     resources:
       - smbcommonconfigs
-      - smbsecurityconfigs
-      - smbshares
     verbs:
       - create
       - delete
@@ -101,8 +151,53 @@ rules:
       - samba-operator.samba.org
     resources:
       - smbcommonconfigs/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - samba-operator.samba.org
+    resources:
+      - smbsecurityconfigs
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - samba-operator.samba.org
+    resources:
       - smbsecurityconfigs/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - samba-operator.samba.org
+    resources:
+      - smbshares
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - samba-operator.samba.org
+    resources:
       - smbshares/finalizers
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - samba-operator.samba.org
+    resources:
       - smbshares/status
     verbs:
       - get
