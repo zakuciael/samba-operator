@@ -27,12 +27,14 @@ var svcSelectorKey = "samba-operator.samba.org/service"
 
 func newServiceForSmb(planner *pln.Planner, ns string) *corev1.Service {
 	labels := labelsForSmbServer(planner)
+	annotations := annotationsForSmbService(planner)
+
 	return &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:        planner.InstanceName(),
 			Namespace:   ns,
 			Labels:      labels,
-			Annotations: annotationsForSmbService(planner),
+			Annotations: annotations,
 		},
 		Spec: corev1.ServiceSpec{
 			Type: toServiceType(planner.ServiceType()),
@@ -51,7 +53,7 @@ func newServiceForSmb(planner *pln.Planner, ns string) *corev1.Service {
 
 func annotationsForSmbService(planner *pln.Planner) map[string]string {
 	if planner.CommonConfig != nil {
-		return planner.CommonConfig.Annotations
+		return planner.CommonConfig.Spec.Network.ServiceAnnotations
 	}
 
 	return map[string]string{}
