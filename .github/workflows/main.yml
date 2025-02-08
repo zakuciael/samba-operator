@@ -117,7 +117,7 @@ jobs:
           reg_base="registry.localhost"
           reg_port="5000"
           reg="k3d-${reg_base}:${reg_port}"
-          img="${reg}/samba.org/samba-operator:${tag}"
+          img="${reg}/zakuciael/samba-operator:${tag}"
           {
             # registry params
             echo "REG_BASE=${reg_base}"
