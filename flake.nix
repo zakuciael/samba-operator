@@ -24,6 +24,7 @@
         {
           devShells.default = pkgs.mkShell {
             name = "samba-operator";
+            hardeningDisable = ["all"];
             nativeBuildInputs = with pkgs; [
               gnumake
               kubernetes-controller-tools
